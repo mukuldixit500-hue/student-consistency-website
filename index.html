@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyPulse</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>StudyPulse</h1>
+  <p>Plan your study time, mark what you did, and watch your consistency grow.</p>
+</header>
+
+<main>
+  <!-- Summary numbers for the selected day / week -->
+  <section class="stats">
+    <div><b id="statDay">0%</b><span>Day completion</span></div>
+    <div><b id="statWeek">0%</b><span>Week completion</span></div>
+    <div><b id="statStreak">0</b><span>Day streak</span></div>
+    <div><b id="statTime">0m / 0m</b><span>Actual / planned</span></div>
+  </section>
+
+  <!-- Add / edit form -->
+  <section class="panel">
+    <h2 id="formTitle">Add activity</h2>
+    <form id="activityForm" class="grid">
+      <label>Title <input id="title" placeholder="Solve integration problems"></label>
+      <label>Subject <input id="subject" list="subjectList" placeholder="Maths"></label>
+      <datalist id="subjectList"></datalist>
+      <label>Date <input id="date" type="date"></label>
+      <label>Start time <input id="start" type="time"></label>
+      <label>Planned (minutes) <input id="planned" type="number" min="1" value="60"></label>
+      <label>Actual (minutes) <input id="actual" type="number" min="0" value="0"></label>
+      <label>Status
+        <select id="status">
+          <option value="pending">Pending</option>
+          <option value="done">Completed</option>
+          <option value="missed">Missed</option>
+        </select>
+      </label>
+      <div class="formBtns">
+        <button type="submit" id="saveBtn">Add activity</button>
+        <button type="button" id="cancelBtn" class="ghost" hidden>Cancel edit</button>
+      </div>
+    </form>
+    <p id="formError" class="error"></p>
+  </section>
+
+  <!-- Timetable -->
+  <section class="panel">
+    <div class="bar">
+      <h2>Timetable</h2>
+      <div class="controls">
+        <button id="dayBtn" class="tab on">Day</button>
+        <button id="weekBtn" class="tab">Week</button>
+        <input id="viewDate" type="date" aria-label="Date to view">
+      </div>
+    </div>
+    <div id="activityList"></div>
+  </section>
+
+  <!-- Charts -->
+  <section class="panel">
+    <h2>Charts for this view</h2>
+    <div class="charts">
+      <div class="chartBox"><canvas id="pieChart"></canvas></div>
+      <div class="chartBox"><canvas id="barChart"></canvas></div>
+    </div>
+  </section>
+
+  <!-- Heatmap -->
+  <section class="panel">
+    <h2>Consistency, last 12 weeks</h2>
+    <div id="heatmap" class="heatmap"></div>
+    <p class="muted">Darker squares mean more of that day's plan was completed. A day counts toward your streak at 50% or more.</p>
+  </section>
+
+  <!-- Goals -->
+  <section class="panel">
+    <h2>Weekly subject goals</h2>
+    <form id="goalForm" class="inline">
+      <input id="goalSubject" list="subjectList" placeholder="Subject">
+      <input id="goalHours" type="number" min="1" step="0.5" placeholder="Hours per week">
+      <button type="submit">Set goal</button>
+    </form>
+    <div id="goalList"></div>
+  </section>
+
+  <!-- Insights -->
+  <section class="panel">
+    <h2>Productivity insights</h2>
+    <ul id="insights"></ul>
+  </section>
+</main>
+
+<footer>
+  <button id="sampleBtn" class="ghost">Load sample data</button>
+  <button id="clearBtn" class="ghost">Clear all data</button>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
